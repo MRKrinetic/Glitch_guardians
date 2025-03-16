@@ -17,7 +17,7 @@ This application combines Optical Character Recognition (OCR), machine translati
 - **Distance Calculation**
   - Calculate distance between two locations
   - Get estimated travel duration
-  - Powered by GoMap API
+  - Powered by GoMaps.pro API
 
 ## Setup Instructions
 
@@ -46,7 +46,7 @@ This application combines Optical Character Recognition (OCR), machine translati
    - Ensure the installation path matches the one in the code (default: `C:\Program Files\Tesseract-OCR\tesseract.exe`)
 
 5. **Set up API Keys**
-   - Replace the GoMap API key in `streamlit(app).py` with your own key
+   - Replace the GoMaps.pro API key in `streamlit(app).py` with your own key
 
 ## Usage
 
@@ -69,6 +69,7 @@ This application combines Optical Character Recognition (OCR), machine translati
 - `ocr.py`: OCR functionality
 - `data.csv`: Training data for model fine-tuning
 - `requirements.txt`: Project dependencies
+- `venv/`: Virtual environment directory
 
 ## Dependencies
 
@@ -93,4 +94,4 @@ This application combines Optical Character Recognition (OCR), machine translati
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests! 
+Feel free to submit issues and enhancement requests!
