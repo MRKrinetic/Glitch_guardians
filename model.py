@@ -1,7 +1,9 @@
 from transformers import MarianMTModel, MarianTokenizer
 
-english_text =input(">>")
+english_text =input("Enter English Text : ")
 # Load the pre-trained model and tokenizer
+#Helsinki is used to translate the english text into marathi text .
+# It gives us moderate accurecy at the time of translation.
 model_name = "Helsinki-NLP/opus-mt-en-mr"
 tokenizer = MarianTokenizer.from_pretrained(model_name)
 model = MarianMTModel.from_pretrained(model_name)
@@ -20,4 +22,5 @@ def translate_to_marathi(text):
 # english_text = "Hello, how are you?"
 marathi_translation = translate_to_marathi(english_text)
 # print(f"English: {english_text}")
+# It returns the english text to marathi
 print(f"Marathi: {marathi_translation}")
