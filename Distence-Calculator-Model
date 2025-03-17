@@ -1,0 +1,44 @@
+# IT RETURNS THE DISTENCE BETWEEN TWO PLACES/DESTINATIONS.
+
+# 1ST MODEL RETURN DISTENCE BETWEEN TWO DESTINATION IN ENGLISH 
+# AND CHECKS IF THERE ANY PERSON NAME ,IF YES THEN SHOWS DESTINATION NAME IS INVALID .
+
+from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
+
+# Sample lists of common first and last names
+common_first_names = {'John', 'Jane', 'Michael', 'Emily'}
+common_last_names = {'Smith', 'Doe', 'Johnson', 'Brown'}
+
+def is_person_name(name):
+    parts = name.split()
+    if len(parts) == 2:
+        first_name, last_name = parts
+        return first_name in common_first_names and last_name in common_last_names
+    return False
+
+def geocode_location(location_name):
+    if is_person_name(location_name):
+        print(f"'{location_name}' appears to be a person's name. Skipping geocoding.")
+        return None
+    geolocator = Nominatim(user_agent="distance_calculator")
+    location = geolocator.geocode(location_name)
+    if location:
+        return (location.latitude, location.longitude)
+    else:
+        print(f"Geocoding failed for '{location_name}'.")
+        return None
+
+# Example usage
+location1 = "Pune, India"
+location2 = "Sambhajinagar,India"
+
+coords_1 = geocode_location(location1)
+coords_2 = geocode_location(location2)
+
+if coords_1 and coords_2:
+    distance = geodesic(coords_1, coords_2).kilometers
+    print(f"The distance between {location1} and {location2} is {distance:.2f} km.")
+else:
+    print("Distance calculation could not be performed due to invalid location data.")
+
