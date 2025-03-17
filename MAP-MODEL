@@ -1,0 +1,45 @@
+# RETURNS DIRECTION IN MAP IN THE FORM OF HTML FILE 
+
+from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
+import folium
+
+# Initialize geolocator
+geolocator = Nominatim(user_agent="distance_calculator")
+
+# Define cities
+city1 = "Pune, India"
+city2 = "Mumbai, India"
+
+# Geocode cities
+location1 = geolocator.geocode(city1)
+location2 = geolocator.geocode(city2)
+
+# Extract coordinates
+coords_1 = (location1.latitude, location1.longitude)
+coords_2 = (location2.latitude, location2.longitude)
+
+# Calculate distance
+distance = geodesic(coords_1, coords_2).kilometers
+
+# Create map centered between the two cities
+map_center = [(coords_1[0] + coords_2[0]) / 2, (coords_1[1] + coords_2[1]) / 2]
+mymap = folium.Map(location=map_center, zoom_start=7)
+
+# Add markers
+folium.Marker(coords_1, popup=f"{city1}").add_to(mymap)
+folium.Marker(coords_2, popup=f"{city2}").add_to(mymap)
+
+# Draw line between cities
+folium.PolyLine(locations=[coords_1, coords_2], color='blue').add_to(mymap)
+
+# Add distance label
+folium.Marker(
+    location=map_center,
+    icon=folium.DivIcon(
+        html=f'<div style="font-size: 12pt; color: black;">Distance: {distance:.2f} km</div>'
+    )
+).add_to(mymap)
+
+# Save map to HTML
+mymap.save("distance_map.html")
