@@ -1,0 +1,31 @@
+## RTEURNS THE DISTENCE BETWEEN TWO PLACES IN MARATHI
+
+from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
+
+def get_city_coordinates(city_name):
+    """Retrieve the latitude and longitude of a city."""
+    geolocator = Nominatim(user_agent="distance_calculator")
+    location = geolocator.geocode(city_name)
+    if location:
+        return (location.latitude, location.longitude)
+    else:
+        print(f"'{city_name}' हे शहर शोधता आले नाही.")
+        return None
+
+def main():
+    # शहरांची नावे
+    city1 = "पुणे, भारत"
+    city2 = "मुंबई, भारत"
+
+    # शहरांचे समन्वय मिळवा
+    coords_1 = get_city_coordinates(city1)
+    coords_2 = get_city_coordinates(city2)
+
+    if coords_1 and coords_2:
+        # अंतर मोजा
+        distance = geodesic(coords_1, coords_2).kilometers
+        print(f"{city1} आणि {city2} यांच्यातील अंतर: {distance:.2f} किमी.")
+
+if __name__ == "__main__":
+    main()
